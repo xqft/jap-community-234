@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/main.js"></script>
+    <title>Document</title>
+
+    <style>
+        body {
+            margin: 0;
+        }
+        .explicacion {
+            font-family: Arial, Helvetica, sans-serif;
+            max-width: min(600px, 100vw);
+            text-align: justify;
+        }
+        .demo {
+            width: 100vw;
+            height: 100vw;
+            background-color: rgba(0, 0, 0, .3);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: grid;
+            place-items: center;
+        }
+        .board {
+            padding: 20px;
+            width: 600px;
+            height: 600px;
+            border: 1px solid black;
+            display: grid;
+            grid-template-rows: repeat(8, 1fr);
+            grid-template-columns: repeat(8, 1fr);
+            background-color: #f0ead9;
+        }
+        .black {
+            background-color: #181818;
+        }
+        .white {
+            background-color: #fdfdfd;
+        }
+    </style>
+</head>
+<body>
+    <div class="explicacion">
+        <h1>Tarea Grupal</h1>
+        <p>
+            Para este ejercicio contamos con un div que contiene la clase <b>board</b>
+            <br>
+            La tarea es poder generar un tablero de ajedrez dentro de ese div, utilizando JavaScript.
+        </p>
+        <p>
+            Debejos crear cada cuadrado de forma tal que reprecente el espacio de una casilla blanca o negra según corresponda.
+            <br>
+            Entonces mediante la creación dinámica de <b>div</b>'s vamos a rellenar el espacio (serían un total de 64 divs donde 32 tendrán el color negro y los otros 32 de color blanco).
+            <br>
+            Podemos utilizar las clases <b>black</b> y <b>white</b> las que ya contienen el color de fondo necesario.
+        </p>
+        <p>
+            Si necesitas observar como se tendría que ver el trabajo final, podes hacer click en el botón.
+        </p>
+        <button onclick="mostrarImg()">Mostrar Imagen (dura 3s)</button>
+    </div>
+    <div class="board">
+        
+    </div>
+    
+    <script>
+        function mostrarImg() {
+            const cont = document.createElement('div');
+            cont.classList.add('demo');
+            const img = document.createElement('img');
+            img.src = 'img/demo.png';
+            cont.append(img);
+            document.body.append(cont);
+            setTimeout(() => {
+                cont.remove();
+            }, 3000);
+        }
+    </script>
+
+</body>
+</html>
