@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const input         = document.querySelector('#item');
     const btnAgregar    = document.querySelector('#agregar');
+    const btnTitulo     = document.querySelector('#titulo');
+    const btnSeparador  = document.querySelector('#separador');
+    const btnLimpiar    = document.querySelector('#limpiar');
     const lista         = document.querySelector('#contenedor');
-    const titulo        = document.querySelector('#titulo');
-    const grupoTitulo   = document.querySelector('.needs-validation');
-    const descripcion   = document.querySelector('#descripcion');
 
     let listado = window.localStorage.getItem('lista');
     listado = JSON.parse(listado)
@@ -12,19 +13,29 @@ document.addEventListener('DOMContentLoaded', () => {
         listado = []
     else 
         for (const valor of listado)
-            lista.innerHTML += `${valor}`;
+            lista.innerHTML += `<li> ${valor}</li>`;
     
-    function agregarItem(titulo, descripcion, lista) {
-        const contenido = `<li><h2>${titulo}</h2> <p>${descripcion}</p></li>`;
-        lista.innerHTML += contenido;
-        listado.push(contenido);
+    function agregarItem(valor, lista) {
+        lista.innerHTML += `<li> ${valor}</li>`
+        listado.push(valor);
         window.localStorage.setItem('lista', JSON.stringify(listado))
     }
     
-    btnAgregar.addEventListener('click', ()=>{
-        if (titulo.value != '')
-            agregarItem(titulo.value, descripcion.value, lista);
-        else
-            grupoTitulo.classList.add("was-validated");
+    btnAgregar.addEventListener('click', () => {
+        if (input.value != '')
+            agregarItem(input.value, lista);
     });
+    
+    btnLimpiar.addEventListener('click', () => {
+        localStorage.removeItem("lista");
+        listado = [];
+        lista.innerHTML = ""; 
+    });
+
+    btnTitulo.addEventListener('click', () => {
+        if (input.value != '')
+            agregarItem("<h2>" + input.value + "</h2>", lista);
+    });
+
+    btnSeparador.addEventListener('click', () => agregarItem("<hr>", lista));
 });
